@@ -1,6 +1,6 @@
 {
   "name": "@butnothero/axios-wrapper",
-  "version": "1.0.1-rc.1",
+  "version": "1.0.1-rc.2",
   "description": "Generic helper class for wrapping axios calls",
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "types": "./dist/types.ts",
+  "types": "./dist/index.d.ts",
   "files": [
     "./dist/*"
   ],
@@ -18,7 +18,7 @@
     ".": {
       "require": "./dist/index.js",
       "import": "./dist/index.mjs",
-      "types": "./dist/types.ts"
+      "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
