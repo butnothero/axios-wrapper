@@ -8,7 +8,7 @@ import type {
   _Response,
   ApiMethodParamsOptions,
   AxiosWrapperOptions,
-} from './index.d';
+} from './types';
 
 export class AxiosWrapper {
   static DEFAULT_TIMEOUT = 30 * 1000;
