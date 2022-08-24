@@ -22,7 +22,8 @@
     "lib": ["esnext", "dom"],
     "paths": {
       "@/*": ["src/*"],
-    }
+    },
+    "outDir": "./dist"
   },
   "types": [
     "node",
@@ -30,7 +31,7 @@
   "typeRoots": [
     "node_modules/@types",
   ],
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*"],
   // Needed to avoid files copied into 'dist' folder (e.g. a `.d.ts` file inside `src-ssr` folder)
   // to be evaluated by TS when their original files has been updated
   "exclude": ["/dist", "node_modules"]
