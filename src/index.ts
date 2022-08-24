@@ -1,5 +1,5 @@
 import { cloneDeep, flow } from 'lodash';
-import axios, { AxiosInstance, AxiosRequestConfig, CancelTokenSource } from 'axios/index.js';
+import axios, { AxiosInstance, AxiosRequestConfig, CancelTokenSource } from 'axios';
 import type {
   ApiMethodParams,
   CollectedRequestInfo,
@@ -8,9 +8,9 @@ import type {
   _Response,
   ApiMethodParamsOptions,
   AxiosWrapperOptions,
-} from './types/index.js';
+} from './index.d';
 
-export default class AxiosWrapper {
+export class AxiosWrapper {
   static DEFAULT_TIMEOUT = 30 * 1000;
 
   protected readonly _axios: AxiosInstance;
