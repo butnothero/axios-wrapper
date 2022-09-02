@@ -31,24 +31,24 @@ export class AxiosWrapper {
       config = {},
       apiEndpoint = '',
       collector = {},
-      localhost = {},
+      // localhost = {},
       interceptors = undefined,
     } = options;
 
-    if (typeof localhost === 'boolean' && localhost) {
-      config.baseURL = this._getAppUrl();
-    } else if (typeof localhost === 'object') {
-      const port = localhost?.port ? String(localhost.port) : '';
-      const prefix = localhost?.prefix ? `${localhost.prefix}` : '';
-      let url = this._getAppUrl() + prefix;
-
-      if (port) {
-        const currentUrlPort = new URL(url).port;
-        url = url.replace(currentUrlPort, port);
-      }
-
-      config.baseURL = url;
-    }
+    // if (typeof localhost === 'boolean' && localhost) {
+    //   config.baseURL = this._getAppUrl();
+    // } else if (typeof localhost === 'object') {
+    //   const port = localhost?.port ? String(localhost.port) : '';
+    //   const prefix = localhost?.prefix ? `${localhost.prefix}` : '';
+    //   let url = this._getAppUrl() + prefix;
+    //
+    //   if (port) {
+    //     const currentUrlPort = new URL(url).port;
+    //     url = url.replace(currentUrlPort, port);
+    //   }
+    //
+    //   config.baseURL = url;
+    // }
 
     const axiosConfig: AxiosRequestConfig = {
       timeout: AxiosWrapper.DEFAULT_TIMEOUT,
