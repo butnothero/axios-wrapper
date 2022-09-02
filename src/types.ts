@@ -1,7 +1,7 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 interface LocalhostRequest {
-  port?: number;
+  port?: number | string;
   prefix?: string;
 }
 
