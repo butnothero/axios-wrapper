@@ -1,7 +1,8 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 interface LocalhostRequest {
-  enable?: boolean;
+  port?: number;
+  prefix?: string;
 }
 
 export interface CollectorOptions {
@@ -23,7 +24,7 @@ export interface AxiosWrapperOptions {
   config?: AxiosRequestConfig;
   apiEndpoint?: string;
   collector?: CollectorOptions;
-  localhost?: LocalhostRequest;
+  localhost?: boolean | LocalhostRequest;
   interceptors?: Interceptors;
 }
 

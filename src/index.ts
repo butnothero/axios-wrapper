@@ -1,13 +1,13 @@
-import { cloneDeep, flow } from 'lodash';
-import axios, { AxiosInstance, AxiosRequestConfig, CancelTokenSource } from 'axios';
+import {cloneDeep, flow} from 'lodash';
+import axios, {AxiosInstance, AxiosRequestConfig, CancelTokenSource} from 'axios';
 import type {
+  _Response,
   ApiMethodParams,
+  ApiMethodParamsOptions,
+  AxiosWrapperOptions,
   CollectedRequestInfo,
   CollectorOptions,
   RequestInfoToCollect,
-  _Response,
-  ApiMethodParamsOptions,
-  AxiosWrapperOptions,
 } from './types';
 
 export class AxiosWrapper {
@@ -35,10 +35,12 @@ export class AxiosWrapper {
       interceptors = undefined,
     } = options;
 
-    if (localhost.enable && config?.baseURL) {
-      config.baseURL = process.env.CLIENT
-        ? config.baseURL
-        : `${process.env.APP_URL}${config.baseURL}`;
+    if (typeof localhost === 'boolean' && localhost) {
+      config.baseURL = this._getEnvUrl(config);
+    } else if (typeof localhost === 'object') {
+      const port = localhost?.port ? localhost.port : '';
+      const prefix = localhost?.prefix ? `/${localhost.prefix}` : '';
+      config.baseURL = port ? `http://localhost:${ port }${ prefix }` : this._getEnvUrl(config);
     }
 
     const axiosConfig: AxiosRequestConfig = {
@@ -76,6 +78,12 @@ export class AxiosWrapper {
       errors: [],
       requests: [],
     };
+  }
+
+  private _getEnvUrl(config) {
+    return process.env.CLIENT
+      ? config.baseURL
+      : `${process.env.APP_URL}${config.baseURL}`
   }
 
   setApiEndpoint = (endpoint = '') => {
