@@ -1,6 +1,6 @@
 {
   "name": "@butnothero/axios-wrapper",
-  "version": "1.0.1-rc.4",
+  "version": "1.0.1-rc5",
   "description": "Generic helper class for wrapping axios calls",
   "repository": {
     "type": "git",

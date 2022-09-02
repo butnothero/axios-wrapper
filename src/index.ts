@@ -1,5 +1,5 @@
-import {cloneDeep, flow} from 'lodash';
-import axios, {AxiosInstance, AxiosRequestConfig, CancelTokenSource} from 'axios';
+import { cloneDeep, flow } from 'lodash';
+import axios, { AxiosInstance, AxiosRequestConfig, CancelTokenSource } from 'axios';
 import type {
   _Response,
   ApiMethodParams,
@@ -40,7 +40,9 @@ export class AxiosWrapper {
     } else if (typeof localhost === 'object') {
       const port = localhost?.port ? localhost.port : '';
       const prefix = localhost?.prefix ? `/${localhost.prefix}` : '';
-      config.baseURL = port ? `http://localhost:${ port }${ prefix }` : this._getEnvUrl(config);
+      config.baseURL = port
+        ? `http://localhost:${port}${prefix}`
+        : `${this._getEnvUrl(config)}${prefix}`;
     }
 
     const axiosConfig: AxiosRequestConfig = {
@@ -81,9 +83,7 @@ export class AxiosWrapper {
   }
 
   private _getEnvUrl(config) {
-    return process.env.CLIENT
-      ? config.baseURL
-      : `${process.env.APP_URL}${config.baseURL}`
+    return process.env.CLIENT ? config.baseURL : `${process.env.APP_URL}${config.baseURL}`;
   }
 
   setApiEndpoint = (endpoint = '') => {
