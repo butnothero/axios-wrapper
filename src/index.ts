@@ -83,7 +83,7 @@ export class AxiosWrapper {
   }
 
   private _getEnvUrl(config) {
-    return process.env.CLIENT ? config.baseURL : `${process.env.APP_URL}${config.baseURL}`;
+    return process.env.CLIENT ? config.baseURL : `${process.env.APP_URL}`;
   }
 
   setApiEndpoint = (endpoint = '') => {
