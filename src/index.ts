@@ -36,13 +36,18 @@ export class AxiosWrapper {
     } = options;
 
     if (typeof localhost === 'boolean' && localhost) {
-      config.baseURL = this._getEnvUrl(config);
+      config.baseURL = this._getAppUrl();
     } else if (typeof localhost === 'object') {
-      const port = localhost?.port ? localhost.port : '';
-      const prefix = localhost?.prefix ? `/${localhost.prefix}` : '';
-      config.baseURL = port
-        ? `http://localhost:${port}${prefix}`
-        : `${this._getEnvUrl(config)}${prefix}`;
+      const port = localhost?.port ? String(localhost.port) : '';
+      const prefix = localhost?.prefix ? `${localhost.prefix}` : '';
+      let url = this._getAppUrl() + prefix;
+
+      if (port) {
+        const currentUrlPort = new URL(url).port;
+        url = url.replace(currentUrlPort, port);
+      }
+
+      config.baseURL = url;
     }
 
     const axiosConfig: AxiosRequestConfig = {
@@ -82,8 +87,8 @@ export class AxiosWrapper {
     };
   }
 
-  private _getEnvUrl(config) {
-    return process.env.CLIENT ? config.baseURL : `${process.env.APP_URL}`;
+  private _getAppUrl() {
+    return process.env.APP_URL;
   }
 
   setApiEndpoint = (endpoint = '') => {
