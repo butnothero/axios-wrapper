@@ -10,6 +10,8 @@ import type {
   RequestInfoToCollect,
 } from './types';
 
+export type { _Response };
+
 export class AxiosWrapper {
   static DEFAULT_TIMEOUT = 30 * 1000;
 
