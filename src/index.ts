@@ -1,5 +1,6 @@
-import { cloneDeep, flow } from 'lodash';
-import axios, { AxiosInstance, AxiosRequestConfig, CancelTokenSource } from 'axios';
+import cloneDeep from 'lodash/clonedeep';
+import flow from 'lodash/flow';
+import axios, { AxiosInstance, AxiosRequestConfig, CancelTokenSource, AxiosHeaders } from 'axios';
 import type {
   _Response,
   ApiMethodParams,
@@ -36,21 +37,6 @@ export class AxiosWrapper {
       // localhost = {},
       interceptors = undefined,
     } = options;
-
-    // if (typeof localhost === 'boolean' && localhost) {
-    //   config.baseURL = this._getAppUrl();
-    // } else if (typeof localhost === 'object') {
-    //   const port = localhost?.port ? String(localhost.port) : '';
-    //   const prefix = localhost?.prefix ? `${localhost.prefix}` : '';
-    //   let url = this._getAppUrl() + prefix;
-    //
-    //   if (port) {
-    //     const currentUrlPort = new URL(url).port;
-    //     url = url.replace(currentUrlPort, port);
-    //   }
-    //
-    //   config.baseURL = url;
-    // }
 
     const axiosConfig: AxiosRequestConfig = {
       timeout: AxiosWrapper.DEFAULT_TIMEOUT,
@@ -89,10 +75,6 @@ export class AxiosWrapper {
     };
   }
 
-  private _getAppUrl() {
-    return process.env.APP_URL;
-  }
-
   setApiEndpoint = (endpoint = '') => {
     let preparedEndpoint = endpoint;
 
@@ -118,11 +100,12 @@ export class AxiosWrapper {
     value: string;
     methods?: string[];
   }) => {
-    const { headers } = this._axios.defaults;
+    const headers = this._axios.defaults.headers;
     if (Array.isArray(methods)) {
       methods.forEach((method) => {
-        if (headers[method]) {
-          headers[method][name] = value;
+        const data = headers[method];
+        if (data && data instanceof AxiosHeaders) {
+          data[name] = value;
         }
       });
     } else {

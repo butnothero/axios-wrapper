@@ -24,7 +24,6 @@ export interface AxiosWrapperOptions {
   config?: AxiosRequestConfig;
   apiEndpoint?: string;
   collector?: CollectorOptions;
-  // localhost?: boolean | LocalhostRequest;
   interceptors?: Interceptors;
 }
 
