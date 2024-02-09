@@ -1,5 +1,5 @@
-import cloneDeep from 'lodash/clonedeep';
-import flow from 'lodash/flow';
+import cloneDeep from 'lodash/clonedeep.js';
+import flow from 'lodash/flow.js';
 import axios, { AxiosInstance, AxiosRequestConfig, CancelTokenSource, AxiosHeaders } from 'axios';
 import type {
   _Response,
